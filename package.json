@@ -1,0 +1,31 @@
+{
+  "name": "web-payment-processor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node src/server --watch",
+    "test": "babel-node spec/client",
+    "dev": "babel-watch src/server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "delay": "^4.3.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.5",
+    "uuid": "^7.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/runtime": "^7.9.2",
+    "babel-loader": "^8.0.6",
+    "babel-watch": "^7.0.0",
+    "highground": "^1.0.9"
+  }
+}
