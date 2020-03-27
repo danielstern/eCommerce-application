@@ -2,8 +2,9 @@ import { Router } from 'express';
 
 import { validateCreditCard } from '../../utility/validation';
 import { GetCartDetails } from '../../database/cart';
-
 import { initializeDB } from '../../database/utility';
+import { DEV_MODE } from '../../common/config';
+import { checkoutCartCreditCard } from '../../sagas/checkoutCartCreditCard';
 
 import delay from 'delay';
 
@@ -98,8 +99,13 @@ Checkout.post("/credit", async ({body},res)=>{
 
         });
 
-        await delay(10000);
-        await initializeDB();
+        if (DEV_MODE) {
+
+            await delay(10000);
+            await initializeDB();
+
+        }
+
         return;
 
     }
