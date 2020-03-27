@@ -1,5 +1,3 @@
-console.log("TIME FOR CLIENT TIME");
-
 async function handleFormSubmit() {
     event.preventDefault();
     console.log("Hi");
@@ -27,8 +25,6 @@ async function handleFormSubmit() {
     });
     const res = await response.json();
 
-    console.log(res);
-
     document.querySelectorAll('.error').forEach(e => e.remove());
 
     if (!res.success) {
@@ -41,7 +37,8 @@ async function handleFormSubmit() {
             case "PAYMENT_NOT_ACCEPTED":
                 document.getElementById("CheckoutTitle").insertAdjacentHTML("afterEnd",`<div class="error large">Your payment method was declined.</div>`)
                 break;
-            case "FIELD_VALIDATION":
+                
+            case "FIELD_VALIDATION_FAILURE":
                 for (let field in res.errors) {
 
                     for (let error of res.errors[field]) {

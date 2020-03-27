@@ -1,6 +1,7 @@
 import { CreateTransaction, AbortTransaction, CompleteTransaction } from '../../database/transactions';
 import { ProcessCreditCardTransaction } from '../../vendor/local';
 import { StartCartCheckout, AbortCartCheckout, CompleteCartCheckout } from '../../database/cart';
+import { VendorPaymentOutcome } from '../../common/constants';
 
 export async function checkoutCartCreditCard(cartDetails, body) {
 
@@ -14,7 +15,7 @@ export async function checkoutCartCreditCard(cartDetails, body) {
         await CompleteTransaction(transactionId);
         return {
 
-            status: "ACCEPTED"
+            status: VendorPaymentOutcome.ACCEPTED
 
         }
         
@@ -25,7 +26,7 @@ export async function checkoutCartCreditCard(cartDetails, body) {
 
         return {
 
-            status: "NOT_ACCEPTED"
+            status: VendorPaymentOutcome.NOT_ACCEPTED
 
         }
 

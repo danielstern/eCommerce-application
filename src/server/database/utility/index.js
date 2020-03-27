@@ -1,4 +1,5 @@
 import { MONGO_URL } from '../../common/config';
+import { CartContentsAction } from '../../common/constants';
 import { MongoClient } from 'mongodb';
 
 let client = undefined;
@@ -11,21 +12,25 @@ export async function initializeDB() {
     const cart = await getCollection("carts", "C1");
     await cart.drop();
     await cart.insertOne({
-        "type" : "CART_CREATED",
-        "date" : "Apr 1 2020",
+
+        "type" : CartContentsAction.CREATE_CART,
+        "date" : new Date("Apr 1 2020"),
         "meta" : {}
+
     });
 
     await cart.insertOne({
-        "type" : "ITEM_ADDED",
-        "date" : "Apr 2 2020",
+        "type" : CartContentsAction.ADD_ITEM,
+        "date" : new Date("Apr 2 2020"),
         "meta" : {
+
             "itemValue" : 108.0,
             "itemId" : "I1",
             "itemName" : "Otaku Katana"
+            
         }
     });
-
+ 
     await client.db("transactions").dropDatabase();
 
     

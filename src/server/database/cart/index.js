@@ -1,4 +1,5 @@
 import { getCollection } from '../utility';
+import { CartCheckoutStatus, CartCheckoutAction, CartContentsAction } from '../../common/constants';
 
 export function cartReducer (cartId, history) {
 
@@ -8,20 +9,27 @@ export function cartReducer (cartId, history) {
         cartId,
         checkoutStatus: history
             .sort((a,b) => new Date(a.date) - new Date(b.date))
-            .reduce((a,b)=>{
-                switch (b.type) {
-                    case "CHECKOUT_STARTED":
-                        return "CHECKOUT_STARTED";
-                    case "CHECKOUT_ABORTED":
-                        return "CHECKOUT_NOT_STARTED";
-                    case "CHECKOUT_COMPLETED":
-                        return "CHECKOUT_COMPLETED";
+            .reduce((status,event)=>{
+                switch (event.type) {
+
+                    case CartCheckoutAction.START_CHECKOUT:
+                        return CartCheckoutStatus.CHECKOUT_STARTED;
+
+                    case CartCheckoutAction.ABORT_CHECKOUT:
+                        return CartCheckoutStatus.CHECKOUT_NOT_STARTED;
+
+                    case CartCheckoutAction.COMPLETE_CHECKOUT:
+                        return CartCheckoutStatus.CHECKOUT_COMPLETED;
+
                     default:
-                        return a;
+                        return status;
+
                 }
-            }, "CHECKOUT_NOT_STARTED"),
+            }, 
+            CartCheckoutStatus.CHECKOUT_NOT_STARTED
+        ),
         summarizedValue: history
-            .filter(action => action.type === "ITEM_ADDED")
+            .filter(action => action.type === CartContentsAction.ADD_ITEM)
             .map(action => action.meta.itemValue)
             .reduce((a,b) => a + b)
 
@@ -41,24 +49,20 @@ export async function GetCartDetails (cartId) {
 export async function StartCartCheckout (cartId) {
 
     const collection = await getCollection("carts", cartId);
-    await collection.insertOne({type:"CHECKOUT_STARTED", date: new Date()});
-
-    return { }
+    await collection.insertOne({type:CartCheckoutAction.START_CHECKOUT, date: new Date()});
 
 }
 
 export async function CompleteCartCheckout (cartId) {
 
     const collection = await getCollection("carts", cartId);
-    await collection.insertOne({type:"CHECKOUT_COMPLETED", date: new Date()});
-
-    return { }
+    await collection.insertOne({type:CartCheckoutAction.COMPLETE_CHECKOUT, date: new Date()});
 
 }
 
 export async function AbortCartCheckout (cartId) {
 
     const collection = await getCollection("carts", cartId);
-    await collection.insertOne({type:"CHECKOUT_ABORTED", date: new Date()})
+    await collection.insertOne({type:CartCheckoutAction.ABORT_CHECKOUT, date: new Date()})
 
 }

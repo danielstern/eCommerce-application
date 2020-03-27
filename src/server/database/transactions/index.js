@@ -1,6 +1,7 @@
 import { v1 } from 'uuid';
 
 import { getCollection } from '../utility';
+import { TransactionAction, TransactionType } from '../../common/constants';
 
 export async function CreateTransaction (cartDetails) {
 
@@ -9,22 +10,23 @@ export async function CreateTransaction (cartDetails) {
 
     await collection.insertOne({
 
-        type:"TRANSACTION_CREATED",
+        type:TransactionAction.CREATE_TRANSACTION,
         date:new Date(),
         meta:{ 
 
-            cartId:cartDetails.cartId,
-            summariedValue:cartDetails.summarizedValue,
-            type:"CHECKOUT_CART"
+            cartId: cartDetails.cartId,
+            summarizedValue:cartDetails.summarizedValue,
+            type: TransactionType.CART_CHECKOUT
 
         },
-        
 
     })
 
     return {
+
         transactionId
-    };
+
+    }
 
 }
 
@@ -34,11 +36,11 @@ export async function AbortTransaction (transactionId) {
     
     await collection.insertOne({
 
-        type:"TRANSACTION_ABORTED",
-        date:new Date(),
-        meta:{ }
+        type: TransactionAction.ABORT_TRANSACTION,
+        date: new Date(),
+        meta: { }
 
-    })
+    });
 
 }
 
@@ -49,9 +51,9 @@ export async function CompleteTransaction (transactionId) {
     
     await collection.insertOne({
 
-        type:"TRANSACTION_COMPLETED",
-        date:new Date(),
-        meta:{ }
+        type: TransactionAction.COMPLETE_TRANSACTION,
+        date: new Date(),
+        meta: { }
 
     });
 
