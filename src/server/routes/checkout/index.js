@@ -1,47 +1,13 @@
 import { Router } from 'express';
 
-import { validateCreditCard } from '../common/validation';
-import { GetCartDetails, StartCartCheckout, AbortCartCheckout, CompleteCartCheckout } from '../database/cart';
-import { CreateTransaction, AbortTransaction, CompleteTransaction } from '../database/transactions';
-import { initializeDB } from '../database/utility';
-import { ProcessCreditCardTransaction } from '../vendor/local';
+import { validateCreditCard } from '../../utility/validation';
+import { GetCartDetails } from '../../database/cart';
+
+import { initializeDB } from '../../database/utility';
+
 import delay from 'delay';
 
 export const Checkout = Router();
-
-export async function checkoutCartCreditCard(cartDetails, body) {
-
-    const { transactionId } = await CreateTransaction(cartDetails);
-    await StartCartCheckout(cartDetails.cartId);
-    const { success } = await ProcessCreditCardTransaction(body, cartDetails.cartId);
-
-    if (success) {
-        
-        await CompleteCartCheckout(body.cartId);
-        await CompleteTransaction(transactionId);
-        return {
-
-            status: "ACCEPTED"
-
-        }
-        
-    } else {
-
-        await AbortCartCheckout(body.cartId);
-        await AbortTransaction(transactionId);
-
-        return {
-
-            status: "NOT_ACCEPTED"
-
-        }
-
-    }
-    
-
-    
-
-}
 
 Checkout.post("/credit", async ({body},res)=>{
 

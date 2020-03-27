@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node src/server --watch",
-    "test": "babel-node spec/client",
+    "start": "babel-node src/server",
     "dev": "babel-watch src/server"
   },
   "keywords": [],
