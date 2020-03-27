@@ -27,6 +27,7 @@
     "babel-watch": "^7.0.0",
     "cross-env": "^7.0.2",
     "env": "0.0.2",
-    "highground": "^1.0.9"
+    "highground": "^1.0.9",
+    "open": "^7.0.3"
   }
 }

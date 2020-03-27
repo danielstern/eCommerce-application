@@ -6,8 +6,6 @@ let client = undefined;
 
 export async function initializeDB() {
 
-    console.info("DB Initializing");
-
     const client = await getClient();
     const cart = await getCollection("carts", "C1");
     await cart.drop();
@@ -33,7 +31,7 @@ export async function initializeDB() {
  
     await client.db("transactions").dropDatabase();
 
-    
+    console.info("INFO: Database Initialized.");    
 
 }
 
