@@ -31,7 +31,10 @@ export function cartReducer (cartId, history) {
         summarizedValue: history
             .filter(action => action.type === CartContentsAction.ADD_ITEM)
             .map(action => action.meta.itemValue)
-            .reduce((a,b) => a + b)
+            .reduce((a,b) => a + b),
+        contents: history
+            .filter(event => event.type === CartContentsAction.ADD_ITEM)
+            .map(action => action.meta)
 
     }
 

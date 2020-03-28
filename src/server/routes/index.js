@@ -16,7 +16,7 @@ app.listen(PORT, ()=>console.log(`INFO: Application listening on port ${PORT}.`)
 if (DEV_MODE) {
     
     app.use(express.static(path.join(__dirname, "..", "spec", "client")));
-    open("http://localhost:7777");
-    console.info("INFO: Opening development client.");
+    // open("http://localhost:7777");
+    // console.info("INFO: Opening development client.");
 
 }
