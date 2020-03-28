@@ -30,6 +30,7 @@ export async function initializeDB() {
     });
  
     await client.db("transactions").dropDatabase();
+    await client.db("customers").dropDatabase();
 
     console.info("INFO: Database Initialized.");    
 

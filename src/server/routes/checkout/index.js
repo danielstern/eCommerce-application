@@ -97,12 +97,12 @@ Checkout.post("/credit", async ({body},res)=>{
 
             });
 
-            if (DEV_MODE) {
+            // if (DEV_MODE) {
 
-                await delay(10000);
-                await initializeDB();
+                // await delay(10000);
+                // await initializeDB();
 
-            }
+            // }
 
             break;
 
