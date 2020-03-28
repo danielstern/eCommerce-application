@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node src/server",
-    "dev": "cross-env NODE_ENV=development babel-watch src/server"
+    "dev": "cross-env NODE_ENV=development babel-watch src/server",
+    "paypal-dev": "babel-watch src/server/vendor/paypal/index.spec"
   },
   "keywords": [],
   "author": "",
