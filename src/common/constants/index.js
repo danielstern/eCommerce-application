@@ -1,4 +1,4 @@
-export const CartCheckoutStatus = {
+const CartCheckoutStatus = {
 
     CHECKOUT_STARTED:"CHECKOUT_STARTED",
     CHECKOUT_NOT_STARTED:"CHECKOUT_NOT_STARTED",
@@ -6,7 +6,7 @@ export const CartCheckoutStatus = {
 
 }
 
-export const CartCheckoutAction = {
+const CartCheckoutAction = {
 
     START_CHECKOUT:"START_CHECKOUT",
     ABORT_CHECKOUT:"ABORT_CHECKOUT",
@@ -14,14 +14,14 @@ export const CartCheckoutAction = {
 
 }
 
-export const CartContentsAction = {
+const CartContentsAction = {
 
     ADD_ITEM:"ADD_ITEM",
     CREATE_CART:"CREATE_CART"
 
 }
 
-export const ErrorCode = {
+const ErrorCode = {
 
     CART_NOT_FOUND: "CART_NOT_FOUND",
     CART_TRANSACTION_ALREADY_STARTED: "CART_TRANSACTION_ALREADY_STARTED",
@@ -31,20 +31,33 @@ export const ErrorCode = {
 
 }
 
-export const VendorPaymentOutcome = {
+const VendorPaymentOutcome = {
 
     NOT_ACCEPTED: "NOT_ACCEPTED",
     ACCEPTED: "ACCEPTED"
 
 }
 
-export const TransactionAction = {
+const TransactionAction = {
 
     CREATE_TRANSACTION: "CREATE_TRANSACTION",
     ABORT_TRANSACTION: "ABORT_TRANSACTION",
     COMPLETE_TRANSACTION: "COMPLETE_TRANSACTION"
+
 }
 
-export const TransactionType = {
+const TransactionType = {
+
     CART_CHECKOUT: "CART_CHECKOUT"
+
+}
+
+module.exports = {
+    TransactionAction,
+    TransactionType,
+    VendorPaymentOutcome,
+    ErrorCode,
+    CartCheckoutAction,
+    CartCheckoutStatus,
+    CartContentsAction
 }

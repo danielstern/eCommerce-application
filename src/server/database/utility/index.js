@@ -1,5 +1,5 @@
-import { MONGO_URL } from '../../common/config';
-import { CartContentsAction } from '../../common/constants';
+import { MONGO_URL } from '../../../common/config';
+import { CartContentsAction } from '../../../common/constants';
 import { MongoClient } from 'mongodb';
 
 let client = undefined;

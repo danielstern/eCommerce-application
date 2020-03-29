@@ -1,7 +1,7 @@
 import { CreateTransaction, AbortTransaction, CompleteTransaction } from '../../database/transactions';
 import { ProcessCreditCardTransaction } from '../../vendor/local';
 import { StartCartCheckout, AbortCartCheckout, CompleteCartCheckout } from '../../database/cart';
-import { VendorPaymentOutcome } from '../../common/constants';
+import { VendorPaymentOutcome } from '../../../common/constants';
 
 export async function checkoutCartCreditCard(cartDetails, body) {
 

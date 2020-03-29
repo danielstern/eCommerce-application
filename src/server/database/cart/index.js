@@ -1,5 +1,5 @@
 import { getCollection } from '../utility';
-import { CartCheckoutStatus, CartCheckoutAction, CartContentsAction } from '../../common/constants';
+import { CartCheckoutStatus, CartCheckoutAction, CartContentsAction } from '../../../common/constants';
 
 export function cartReducer (cartId, history) {
 

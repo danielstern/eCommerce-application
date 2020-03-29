@@ -1,21 +1,14 @@
 {
-  "name": "web-payment-processor",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node src/server",
-    "watch-server": "cross-env NODE_ENV=development babel-watch src/server",
-    "watch-client": "cd src/client && npm run dev",
-    "dev": "concurrently npm:watch-*"
+    "dev": "cross-env NODE_ENV=development babel-watch ./"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@babel/preset-react": "^7.9.4",
     "body-parser": "^1.19.0",
-    "concurrently": "^5.1.0",
     "delay": "^4.3.0",
     "express": "^4.17.1",
     "mongodb": "^3.5.5",
@@ -33,7 +26,9 @@
     "@babel/runtime": "^7.9.2",
     "babel-loader": "^8.0.6",
     "babel-watch": "^7.0.0",
-    "cross-env": "^7.0.2",
-    "open": "^7.0.3"
-  }
+    "cross-env": "^7.0.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

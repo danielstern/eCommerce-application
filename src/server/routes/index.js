@@ -3,7 +3,7 @@ import path from "path";
 import { urlencoded, json } from 'body-parser';
 import  open  from 'open';
 
-import { PORT, DEV_MODE } from '../common/config';
+import { PORT, DEV_MODE } from '../../common/config';
 import { Checkout } from './checkout';
 
 const app = new express();

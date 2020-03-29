@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { validateCreditCard } from '../../utility/validation';
 import { GetCartDetails } from '../../database/cart';
-import { CartCheckoutStatus, ErrorCode, VendorPaymentOutcome } from '../../common/constants';
+import { CartCheckoutStatus, ErrorCode, VendorPaymentOutcome } from '../../../common/constants';
 import { checkoutCartCreditCard } from '../../sagas/checkoutCartCreditCard';
 
 
