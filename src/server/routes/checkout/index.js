@@ -25,6 +25,8 @@ Checkout.post("/credit", async ({body},res)=>{
 
     }
 
+    // return;
+
     if (cartDetails.checkoutStatus === CartCheckoutStatus.CHECKOUT_STARTED) {
 
         return res.json({
@@ -37,6 +39,8 @@ Checkout.post("/credit", async ({body},res)=>{
         });
 
     }
+
+    // return;
 
     if (cartDetails.checkoutStatus === CartCheckoutStatus.CHECKOUT_COMPLETED) {
 
@@ -51,7 +55,11 @@ Checkout.post("/credit", async ({body},res)=>{
 
     }
 
-    const { valid, errors } = validateCreditCard(body);
+    // return;
+
+    // console.log(body.creditCardDetails);
+    // return;
+    const { valid, errors } = validateCreditCard(body.creditCardDetails);
 
     if (!valid) {
 
@@ -67,7 +75,11 @@ Checkout.post("/credit", async ({body},res)=>{
 
     }
 
-    const { status } = await checkoutCartCreditCard(cartDetails, body);
+    // return;
+
+    console.log("Body?", body);
+
+    const { status } = await checkoutCartCreditCard({cartDetails, creditCardDetails: body.creditCardDetails, orderDetails: body.orderDetails, deliveryDetails: body.deliveryDetails});
 
     switch (status) {
 

@@ -3,7 +3,7 @@ import React from 'react';
 const styles = {
     table:{borderCollapse:"collapse", border:"1px solid black"}
 }
-export const Template = ({cardDetails, cartDetails, date}) => (
+export const Template = ({creditCardDetails, orderDetails, deliveryDetails, date}) => (
     <div>
         <h1>
             Order Notice
@@ -18,13 +18,33 @@ export const Template = ({cardDetails, cartDetails, date}) => (
         </h2>
         <table style={styles.table}>
             <tbody>
-            {cartDetails.contents.map((item,i) => (
+            {Object.keys(orderDetails).map((item,i) => (
                 <tr key={i}>
                     <td>
-                        {item.itemName}
+                        {item}
                     </td>
                     <td>
-                        ${item.itemValue}
+                        {orderDetails[item]}
+                    </td>
+                </tr>
+            ))}
+            </tbody>
+        </table>
+
+        <h2>
+            
+            Delivery Details
+            
+        </h2>
+        <table style={styles.table}>
+            <tbody>
+            {Object.keys(deliveryDetails).map((item,i) => (
+                <tr key={i}>
+                    <td>
+                        {item}
+                    </td>
+                    <td>
+                        {deliveryDetails[item]}
                     </td>
                 </tr>
             ))}
@@ -43,7 +63,7 @@ export const Template = ({cardDetails, cartDetails, date}) => (
                         Name on Card
                     </th>
                     <td>
-                        {cardDetails.nameOnCard}
+                        {creditCardDetails.nameOnCard}
                     </td>
                 </tr>                
                 <tr>
@@ -51,7 +71,7 @@ export const Template = ({cardDetails, cartDetails, date}) => (
                         Address
                     </th>
                     <td>
-                        {cardDetails.address1}
+                        {creditCardDetails.address}
                     </td>
                 </tr> 
                 <tr>
@@ -59,7 +79,7 @@ export const Template = ({cardDetails, cartDetails, date}) => (
                         Card Number
                     </th>
                     <td>
-                        {cardDetails.cardNumber}
+                        {creditCardDetails.cardNumber}
                     </td>
                 </tr> 
                 <tr>
@@ -67,7 +87,7 @@ export const Template = ({cardDetails, cartDetails, date}) => (
                         CVC
                     </th>
                     <td>
-                        {cardDetails.securityField}
+                        {creditCardDetails.securityField}
                     </td>
                 </tr> 
             </tbody>

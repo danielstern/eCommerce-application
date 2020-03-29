@@ -52,11 +52,11 @@ const defaultState = {
         
         message:"Happy Birthday Shaun!",
         ornament:"RACE_CAR",
-        addons:{
-            sprinkles: true,
-            chocolateChips: true,
-            raisins: false
-        }
+        // addons:{
+        //     sprinkles: true,
+        //     chocolateChips: true,
+        //     raisins: false
+        // }
     },
     orderPricing:{
         fetchStatus: "FETCHING",

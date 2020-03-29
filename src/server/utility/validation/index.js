@@ -41,7 +41,7 @@ export const Validation = {
 
         return function (str = "") {
 
-            const withoutSpaces = str.replace(/\s/g, '');
+            const withoutSpaces = str.toString().replace(/\s/g, '');
 
             if (withoutSpaces.length < min) {
 
@@ -91,10 +91,10 @@ function ErrorCompiler(specs) {
 
 export const CreditCardSchema = {
 
-    cartId:ErrorCompiler([Validation.EmptyField()]),
-    userId:ErrorCompiler([]),
+    // cartId:ErrorCompiler([Validation.EmptyField()]),
+    // userId:ErrorCompiler([]),
     nameOnCard:ErrorCompiler([Validation.EmptyField()]),
-    address1:ErrorCompiler([Validation.EmptyField()]),
+    address:ErrorCompiler([Validation.EmptyField()]),
     cardNumber:ErrorCompiler([Validation.EmptyField(), Validation.NonInteger(), Validation.InvalidLength(16,16)]),
     securityField:ErrorCompiler([Validation.NonInteger(), Validation.InvalidLength(3,3)])
 
@@ -103,6 +103,8 @@ export const CreditCardSchema = {
 export function validateCreditCard (creditCardDetails) {
 
     let errors = {};
+
+    console.log("Validating", creditCardDetails);
 
     for (let field in CreditCardSchema) {
         let value = creditCardDetails[field];

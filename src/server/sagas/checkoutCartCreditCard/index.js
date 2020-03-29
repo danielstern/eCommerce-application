@@ -3,15 +3,16 @@ import { ProcessCreditCardTransaction } from '../../vendor/local';
 import { StartCartCheckout, AbortCartCheckout, CompleteCartCheckout } from '../../database/cart';
 import { VendorPaymentOutcome } from '../../../common/constants';
 
-export async function checkoutCartCreditCard(cartDetails, body) {
+export async function checkoutCartCreditCard({cartDetails, creditCardDetails, orderDetails, deliveryDetails}) {
 
+    console.log(cartDetails, creditCardDetails);
     const { transactionId } = await CreateTransaction(cartDetails);
     await StartCartCheckout(cartDetails.cartId);
-    const { success } = await ProcessCreditCardTransaction(body, cartDetails.cartId);
+    const { success } = await ProcessCreditCardTransaction({cartDetails, creditCardDetails, orderDetails, deliveryDetails});
 
     if (success) {
         
-        await CompleteCartCheckout(body.cartId);
+        await CompleteCartCheckout(cartDetails.cartId);
         await CompleteTransaction(transactionId);
         return {
 
@@ -21,7 +22,7 @@ export async function checkoutCartCreditCard(cartDetails, body) {
         
     } else {
 
-        await AbortCartCheckout(body.cartId);
+        await AbortCartCheckout(cartDetails.cartId);
         await AbortTransaction(transactionId);
 
         return {

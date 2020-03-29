@@ -1,12 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-async function handleFormSubmit({creditCardDetails}) {
+async function handleFormSubmit({creditCardDetails,orderDetails, deliveryDetails, orderPricing }) {
     event.preventDefault();
 
+    const { cartId } = await (await fetch("http://localhost:7777/cart/create", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({creditCardDetails, orderDetails, deliveryDetails, orderPricing})
+    })).json();
+
+    // console.log(cart);
+    // return;
+
     const j = {
-        cartId:"C1",
-        userId:null
+        cartId,
     }
 
     // const z = [
@@ -22,7 +32,7 @@ async function handleFormSubmit({creditCardDetails}) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({...j,... creditCardDetails})
+        body: JSON.stringify({...j, creditCardDetails, orderDetails, deliveryDetails, orderPricing})
     });
     const res = await response.json();
 
@@ -71,7 +81,8 @@ export const CheckoutRoute = connect(state => ({
     payload:{
         orderDetails: state.orderDetails,
         deliveryDetails: state.deliveryDetails,
-        creditCardDetails: state.creditCardDetails
+        creditCardDetails: state.creditCardDetails,
+        orderPricing: state.orderPricing
     }
     
 
