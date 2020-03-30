@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+// import './checkout.css';
+
 async function handleFormSubmit({creditCardDetails,orderDetails, deliveryDetails, orderPricing }) {
     event.preventDefault();
 
@@ -12,20 +14,9 @@ async function handleFormSubmit({creditCardDetails,orderDetails, deliveryDetails
         body: JSON.stringify({creditCardDetails, orderDetails, deliveryDetails, orderPricing})
     })).json();
 
-    // console.log(cart);
-    // return;
-
     const j = {
         cartId,
     }
-
-    // const z = [
-    //     "nameOnCard",
-    //     "address1",
-    //     "cardNumber",
-    //     "securityField"
-    // ].reduce((a,b) => {a[b] = event.target[b].value; return a;}, {});
-
 
     const response = await fetch("http://localhost:7777/checkout/credit", {
         method: 'POST',

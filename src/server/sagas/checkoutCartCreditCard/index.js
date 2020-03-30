@@ -5,7 +5,6 @@ import { VendorPaymentOutcome } from '../../../common/constants';
 
 export async function checkoutCartCreditCard({cartDetails, creditCardDetails, orderDetails, deliveryDetails}) {
 
-    console.log(cartDetails, creditCardDetails);
     const { transactionId } = await CreateTransaction(cartDetails);
     await StartCartCheckout(cartDetails.cartId);
     const { success } = await ProcessCreditCardTransaction({cartDetails, creditCardDetails, orderDetails, deliveryDetails});

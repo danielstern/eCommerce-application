@@ -91,8 +91,6 @@ function ErrorCompiler(specs) {
 
 export const CreditCardSchema = {
 
-    // cartId:ErrorCompiler([Validation.EmptyField()]),
-    // userId:ErrorCompiler([]),
     nameOnCard:ErrorCompiler([Validation.EmptyField()]),
     address:ErrorCompiler([Validation.EmptyField()]),
     cardNumber:ErrorCompiler([Validation.EmptyField(), Validation.NonInteger(), Validation.InvalidLength(16,16)]),
@@ -103,8 +101,6 @@ export const CreditCardSchema = {
 export function validateCreditCard (creditCardDetails) {
 
     let errors = {};
-
-    console.log("Validating", creditCardDetails);
 
     for (let field in CreditCardSchema) {
         let value = creditCardDetails[field];

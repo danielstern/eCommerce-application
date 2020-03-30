@@ -11,12 +11,9 @@ Price.post("/", async ({
         size,
         message = "",
         ornament,
-        addons
     } = body;
     
     let price = 49.99;
-
-    console.log(size, body, message);
 
     switch (size) {
         case "SMALL": {

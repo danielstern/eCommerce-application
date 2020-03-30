@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "dev": "webpack-dev-server --open",
     "build": "webpack",
-    "dev": "webpack --watch"
+    "dev-with-server": "webpack --watch"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",

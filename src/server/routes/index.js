@@ -18,15 +18,4 @@ app.use("/price", Price);
 app.use("/cart", Cart);
 app.use(express.static(path.join(__dirname, "..", "..", "..", "public")));
 app.use(express.static(path.join(__dirname, "..", "..", "..", "bin")));
-app.listen(PORT, ()=>console.log(`INFO: Application listening on port ${PORT}.`));
-
-
-
-// if (DEV_MODE) {
-    
-   
-    // open("http://localhost:7777");
-    // console.info("INFO: Opening development client.");
-
-// }
-// 
+app.listen(PORT, ()=>console.info(`INFO: Application listening on port ${PORT}.`));

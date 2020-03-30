@@ -5,7 +5,6 @@ import { GetCartDetails } from '../../database/cart';
 import { CartCheckoutStatus, ErrorCode, VendorPaymentOutcome } from '../../../common/constants';
 import { checkoutCartCreditCard } from '../../sagas/checkoutCartCreditCard';
 
-
 export const Checkout = Router();
 
 Checkout.post("/credit", async ({body},res)=>{
@@ -25,8 +24,6 @@ Checkout.post("/credit", async ({body},res)=>{
 
     }
 
-    // return;
-
     if (cartDetails.checkoutStatus === CartCheckoutStatus.CHECKOUT_STARTED) {
 
         return res.json({
@@ -39,8 +36,6 @@ Checkout.post("/credit", async ({body},res)=>{
         });
 
     }
-
-    // return;
 
     if (cartDetails.checkoutStatus === CartCheckoutStatus.CHECKOUT_COMPLETED) {
 
@@ -55,10 +50,6 @@ Checkout.post("/credit", async ({body},res)=>{
 
     }
 
-    // return;
-
-    // console.log(body.creditCardDetails);
-    // return;
     const { valid, errors } = validateCreditCard(body.creditCardDetails);
 
     if (!valid) {
@@ -74,10 +65,6 @@ Checkout.post("/credit", async ({body},res)=>{
         });
 
     }
-
-    // return;
-
-    console.log("Body?", body);
 
     const { status } = await checkoutCartCreditCard({cartDetails, creditCardDetails: body.creditCardDetails, orderDetails: body.orderDetails, deliveryDetails: body.deliveryDetails});
 
