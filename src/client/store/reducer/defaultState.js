@@ -24,6 +24,10 @@ export const defaultState = {
         fetchStatus: "FETCHING",
         totalPrice: null
     },
-    currentRoute : "ORDER"
+    formErrors:{
+
+    },
+    currentRoute : "CHECKOUT",
+    checkoutStatus: "NOT_STARTED"
 
 }

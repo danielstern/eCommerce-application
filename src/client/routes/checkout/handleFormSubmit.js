@@ -1,18 +1,12 @@
 
 export async function handleFormSubmit({creditCardDetails,orderDetails, deliveryDetails, orderPricing }) {
-    event.preventDefault();
+    // event.preventDefault();
 
-    const { cartId } = await (await fetch("http://localhost:7777/cart/create", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({creditCardDetails, orderDetails, deliveryDetails, orderPricing})
-    })).json();
+    
 
-    const j = {
-        cartId,
-    }
+    // const j = {
+    //     cartId,
+    // }
 
     const response = await fetch("http://localhost:7777/checkout/credit", {
         method: 'POST',

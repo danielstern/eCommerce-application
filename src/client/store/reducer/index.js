@@ -45,8 +45,25 @@ export function reducer(state = defaultState, action){
                 currentRoute: action.route
             }
         }
+        case "SET_FORM_ERROR" : {
+            return {
+                ...state,
+                formErrors:{
+                    ... state.formErrors,
+                    [action.form] : action.error
+                }
+            }
+        }
+        case "SET_CHECKOUT_STATUS" : {
+            return {
+                ... state,
+                checkoutStatus: action.status
+            }
+        }
         default:
             return state;
 
         }
+
+        
     }

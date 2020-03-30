@@ -5,6 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 
 import { priceCalculation } from './sagas/priceCalculation';
+import { submitCheckout } from './sagas/submitCheckout';
 import { MainRoute } from './routes/main'
 import { reducer } from './store/reducer';
 
@@ -16,6 +17,7 @@ const store = createStore(
 );
 
 sagaMiddleware.run(priceCalculation);
+sagaMiddleware.run(submitCheckout);
 
 ReactDOM.render(
     <Provider store={store}>

@@ -8,14 +8,7 @@ export const CheckoutRoute = connect(state => ({
     ... state.orderPricing,
     ... state.creditCardDetails,
     ... state.deliveryDetails,
-    ... state.orderDetails,
-    payload:{
-        orderDetails: state.orderDetails,
-        deliveryDetails: state.deliveryDetails,
-        creditCardDetails: state.creditCardDetails,
-        orderPricing: state.orderPricing
-    }
-    
+    ... state.orderDetails,    
 
 }), dispatch => ({
     handleReturnToOrder(){
@@ -30,6 +23,12 @@ export const CheckoutRoute = connect(state => ({
     handleDeliveryDetailChange(property, value){
 
         dispatch({type:"MODIFY_DELIVERY_DETAIL_PROPERTY", property, value})
+    },
+    handleSubmitCheckout(e) {
+
+        e.preventDefault();
+        dispatch({type:"SUBMIT_CHECKOUT"});
+
     }
 }))(({
 
@@ -48,11 +47,10 @@ export const CheckoutRoute = connect(state => ({
     flavor,
     ornament,
 
-    payload,
-
     handleReturnToOrder,
     handleCreditCardDetailChange,
-    handleDeliveryDetailChange
+    handleDeliveryDetailChange,
+    handleSubmitCheckout
 
 }) => (
     <div>
@@ -109,7 +107,7 @@ export const CheckoutRoute = connect(state => ({
                 Checkout
 
             </h2>
-            <form onSubmit={()=>handleFormSubmit(payload)}>
+            <form onSubmit={(e)=>handleSubmitCheckout(e)}>
             <h3>
                 Delivery Details
             </h3>
