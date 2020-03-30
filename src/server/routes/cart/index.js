@@ -10,10 +10,3 @@ Cart.post("/create", async ({body},res)=>{
     res.json({cartId, success: true})
 
 });
-
-Cart.post("/add", async ({body},res)=>{
-    
-    await CreateCart();
-    res.json({cartId, success: true})
-
-});

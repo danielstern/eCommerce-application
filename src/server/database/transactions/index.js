@@ -15,7 +15,7 @@ export async function CreateTransaction (cartDetails) {
         meta:{ 
 
             cartId: cartDetails.cartId,
-            summarizedValue:cartDetails.summarizedValue,
+            summarizedValue: cartDetails.summarizedValue,
             type: TransactionType.CART_CHECKOUT
 
         },
@@ -33,7 +33,6 @@ export async function CreateTransaction (cartDetails) {
 export async function AbortTransaction (transactionId) {
 
     const collection = await getCollection("transactions", transactionId);
-    
     await collection.insertOne({
 
         type: TransactionAction.ABORT_TRANSACTION,
@@ -48,7 +47,6 @@ export async function AbortTransaction (transactionId) {
 export async function CompleteTransaction (transactionId) {
 
     const collection = await getCollection("transactions", transactionId);
-    
     await collection.insertOne({
 
         type: TransactionAction.COMPLETE_TRANSACTION,

@@ -5,17 +5,16 @@ form {
 
 }
 
-input {
-
-    width: 80%;
-    margin-top: 10px;
-    margin-bottom: 5px;
-
-}
 .error {
 
     font-size: 12;
     font-family: arial;
     color: crimson;
+    
+}
+
+button.checkout {
+
+    width: 28rem;
     
 }

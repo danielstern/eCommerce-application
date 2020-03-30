@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import { OrderRoute } from '../order';
 import { CheckoutRoute} from '../checkout';
 
+import './main.css';
+
 export const MainRoute = connect(state=>state)(({currentRoute})=>(
-    <div>
+    <div className="main">
         <h1>
             Katie's Custom Cakes
         </h1>

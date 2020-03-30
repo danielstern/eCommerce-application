@@ -2,7 +2,7 @@ import { v1 } from 'uuid';
 
 import { getCollection } from '../utility';
 
-export async function CreateCustomer ({cardDetails}) {
+export async function CreateCustomer ({creditCardDetails}) {
 
     const customerID = v1();
     const collection = await getCollection("customers", customerID);
@@ -25,7 +25,7 @@ export async function CreateCustomer ({cardDetails}) {
         date:new Date(),
         meta:{ 
 
-            cardDetails
+            creditCardDetails
 
         },
 

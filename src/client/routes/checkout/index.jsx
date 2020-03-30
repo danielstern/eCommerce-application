@@ -1,71 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// import './checkout.css';
-
-async function handleFormSubmit({creditCardDetails,orderDetails, deliveryDetails, orderPricing }) {
-    event.preventDefault();
-
-    const { cartId } = await (await fetch("http://localhost:7777/cart/create", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({creditCardDetails, orderDetails, deliveryDetails, orderPricing})
-    })).json();
-
-    const j = {
-        cartId,
-    }
-
-    const response = await fetch("http://localhost:7777/checkout/credit", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({...j, creditCardDetails, orderDetails, deliveryDetails, orderPricing})
-    });
-    const res = await response.json();
-
-    document.querySelectorAll('.error').forEach(e => e.remove());
-
-    if (!res.success) {
-
-        switch (res.errorCode) {
-            case "CART_TRANSACTION_ALREADY_COMPLETED":
-                document.getElementById("CheckoutContainer").innerHTML = `<div><h3>You've already checked out successfully.</div>`
-                break;
-
-            case "PAYMENT_NOT_ACCEPTED":
-                document.getElementById("CheckoutTitle").insertAdjacentHTML("afterEnd",`<div class="error large">Your payment method was declined.</div>`)
-                break;
-                
-            case "FIELD_VALIDATION_FAILURE":
-                for (let field in res.errors) {
-
-                    for (let error of res.errors[field]) {
-                        
-                        document.getElementsByName(field)[0].insertAdjacentHTML("afterEnd",`<div class="error">${error.description}</div>`)
-    
-                    }
-    
-                }
-
-                break;
-                
-        }
-
-    } else {
-
-        document.getElementById("CheckoutContainer").innerHTML = `<div><h3>Success! Your product is on the way!</div>`
-
-    }
-
-}
+import { handleFormSubmit } from './handleFormSubmit';
 
 export const CheckoutRoute = connect(state => ({
 
-    orderPricing:state.orderPricing,
+    ... state.orderPricing,
     ... state.creditCardDetails,
     ... state.deliveryDetails,
     ... state.orderDetails,
@@ -93,7 +33,8 @@ export const CheckoutRoute = connect(state => ({
     }
 }))(({
 
-    orderPricing,
+    totalPrice,
+
     deliveryTo,
     phoneNumber,
     deliveryAddress,
@@ -120,7 +61,7 @@ export const CheckoutRoute = connect(state => ({
 
             <h2>
 
-                Your Order - ${orderPricing.totalPrice}
+                Your Order - ${totalPrice}
 
             </h2>
 
@@ -263,7 +204,7 @@ export const CheckoutRoute = connect(state => ({
                     
                 </div>
 
-                <button type="submit">Checkout with Credit Card</button>
+                <button type="submit" className="checkout">Checkout with Credit Card</button>
 
             </form>
 
