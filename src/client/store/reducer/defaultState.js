@@ -25,7 +25,7 @@ export const defaultState = {
         totalPrice: null
     },
     formErrors:{
-
+        "CHECKOUT":{}
     },
     currentRoute : "CHECKOUT",
     checkoutStatus: "NOT_STARTED"

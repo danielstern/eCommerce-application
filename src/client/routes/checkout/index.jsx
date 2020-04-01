@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { handleFormSubmit } from './handleFormSubmit';
+import { ErrorDisplay } from './ErrorDisplay';
+
+import "./checkout.css";
 
 export const CheckoutRoute = connect(state => ({
 
@@ -9,6 +11,8 @@ export const CheckoutRoute = connect(state => ({
     ... state.creditCardDetails,
     ... state.deliveryDetails,
     ... state.orderDetails,    
+    formErrors: state.formErrors["CHECKOUT"],
+    checkoutStatus: state.checkoutStatus,
 
 }), dispatch => ({
     handleReturnToOrder(){
@@ -50,7 +54,10 @@ export const CheckoutRoute = connect(state => ({
     handleReturnToOrder,
     handleCreditCardDetailChange,
     handleDeliveryDetailChange,
-    handleSubmitCheckout
+    handleSubmitCheckout,
+
+    formErrors,
+    checkoutStatus
 
 }) => (
     <div>
@@ -96,117 +103,132 @@ export const CheckoutRoute = connect(state => ({
                 </tbody>
             </table>
 
-            <button onClick={()=>handleReturnToOrder()}>Change Your Order</button>
+            <button disabled={checkoutStatus === "SUCCESS"} onClick={()=>handleReturnToOrder()}>Change Your Order</button>
 
         </div>
 
-        <div id="CheckoutContainer">
+        {checkoutStatus !== "SUCCESS" && checkoutStatus !== "ALREADY_COMPLETED" ? 
+            <div id="CheckoutContainer">
 
-            <h2 id="CheckoutTitle">
+                <h2 id="CheckoutTitle">
 
-                Checkout
+                    Checkout
 
-            </h2>
-            <form onSubmit={(e)=>handleSubmitCheckout(e)}>
-            <h3>
-                Delivery Details
-            </h3>
-
-            <div>
-            
-                <label>
-        
-                    Name
-        
-                </label>
+                </h2>
+                {checkoutStatus === "PAYMENT_NOT_ACCEPTED" ? <div>
+                    Your payment method was declined.
+                </div> : null}
                 
-                <input type="text" value={deliveryTo} onChange={(e)=>handleDeliveryDetailChange("deliveryTo", e.target.value)}/>
-    
-            </div>
-
-            <div>
-            
-                <label>
-        
-                    Address
-        
-                </label>
-                
-                <input type="text" value={deliveryAddress} onChange={(e)=>handleDeliveryDetailChange("deliveryAddress", e.target.value)}/>
-    
-            </div>
-
-            <div>
-            
-            <label>
-    
-                Phone Number
-    
-            </label>
-            
-            <input type="text" value={phoneNumber} onChange={(e)=>handleDeliveryDetailChange("phoneNumber", e.target.value)}/>
-
-        </div>
-
-
-            <h3>
-                Payment Details
-            </h3>
-            
+                <form onSubmit={(e)=>handleSubmitCheckout(e)}>
+                <h3>
+                    Delivery Details
+                </h3>
 
                 <div>
-            
+                
                     <label>
             
-                        Name on Card
+                        Name
             
                     </label>
                     
-                    <input type="text" value={nameOnCard} onChange={(e)=>handleCreditCardDetailChange("nameOnCard", e.target.value)}/>
-            
+                    <input type="text" value={deliveryTo} onChange={(e)=>handleDeliveryDetailChange("deliveryTo", e.target.value)}/>
+        
                 </div>
 
                 <div>
-            
+                
                     <label>
             
                         Address
             
                     </label>
-
-                    <input type="text" value={address} onChange={(e)=>handleCreditCardDetailChange("address", e.target.value)}/>
                     
-                </div>
-            
-                <div>
-            
-                    <label>
-            
-                        Card Number
-            
-                    </label>
-
-                    <input type="text" value={cardNumber} onChange={(e)=>handleCreditCardDetailChange("cardNumber", e.target.value)}/>
-                    
+                    <input type="text" value={deliveryAddress} onChange={(e)=>handleDeliveryDetailChange("deliveryAddress", e.target.value)}/>
+        
                 </div>
 
                 <div>
-            
-                    <label>
-            
-                        CVC
-            
-                    </label>
+                
+                <label>
+        
+                    Phone Number
+        
+                </label>
+                
+                <input type="text" value={phoneNumber} onChange={(e)=>handleDeliveryDetailChange("phoneNumber", e.target.value)}/>
 
-                    <input type="text" value={securityField} onChange={(e)=>handleCreditCardDetailChange("securityField", e.target.value)}/>
-                    
-                </div>
+            </div>
 
-                <button type="submit" className="checkout">Checkout with Credit Card</button>
 
-            </form>
+                <h3>
+                    Payment Details
+                </h3>
+                
 
-        </div>
+                    <div>
+                
+                        <label>
+                
+                            Name on Card
+                
+                        </label>
+                        
+                        <input type="text" value={nameOnCard} onChange={(e)=>handleCreditCardDetailChange("nameOnCard", e.target.value)}/>
+                        <ErrorDisplay formErrors={formErrors["nameOnCard"]}/>
+                
+                    </div>
+
+                    <div>
+                
+                        <label>
+                
+                            Address
+                
+                        </label>
+
+                        <input type="text" value={address} onChange={(e)=>handleCreditCardDetailChange("address", e.target.value)}/>
+                        <ErrorDisplay formErrors={formErrors["address"]}/>
+                        
+                    </div>
+                
+                    <div>
+                
+                        <label>
+                
+                            Card Number
+                
+                        </label>
+
+                        <input type="text" value={cardNumber} onChange={(e)=>handleCreditCardDetailChange("cardNumber", e.target.value)}/>
+                        <ErrorDisplay formErrors={formErrors["cardNumber"]}/>
+                        
+                    </div>
+
+                    <div>
+                
+                        <label>
+                
+                            CVC
+                
+                        </label>
+
+                        <input type="text" value={securityField} onChange={(e)=>handleCreditCardDetailChange("securityField", e.target.value)}/>
+                        <ErrorDisplay formErrors={formErrors["securityField"]}/>
+                        
+                    </div>
+
+                    <button type="submit" className="checkout">Checkout with Credit Card</button>
+
+                </form>
+
+            </div> : null }
+
+            {{
+                ["SUCCESS"]: <h3>Success! Your product is on the way!</h3>,
+                ["ALREADY_COMPLETED"]: <h3>You've already checked out successfully.</h3>
+            }[checkoutStatus]}
+
 
     </div>
 ))

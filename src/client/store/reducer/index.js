@@ -45,12 +45,12 @@ export function reducer(state = defaultState, action){
                 currentRoute: action.route
             }
         }
-        case "SET_FORM_ERROR" : {
+        case "SET_FORM_ERRORS" : {
             return {
                 ...state,
                 formErrors:{
                     ... state.formErrors,
-                    [action.form] : action.error
+                    [action.form] : action.errors
                 }
             }
         }
