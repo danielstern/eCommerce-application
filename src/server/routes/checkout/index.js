@@ -66,7 +66,14 @@ Checkout.post("/credit", async ({body},res)=>{
 
     }
 
-    const { status } = await checkoutCartCreditCard({cartDetails, creditCardDetails: body.creditCardDetails, orderDetails: body.orderDetails, deliveryDetails: body.deliveryDetails});
+    const { status } = await checkoutCartCreditCard({
+
+        cartDetails, 
+        creditCardDetails: body.creditCardDetails, 
+        orderDetails: body.orderDetails, 
+        deliveryDetails: body.deliveryDetails
+    
+    });
 
     switch (status) {
 
