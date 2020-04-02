@@ -21,8 +21,11 @@ sagaMiddleware.run(submitCheckout);
 
 ReactDOM.render(
     <Provider store={store}>
+
         <MainRoute />
+        
     </Provider>,
+
     document.querySelector("#Container")
 );
 

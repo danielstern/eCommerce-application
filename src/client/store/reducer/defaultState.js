@@ -1,7 +1,5 @@
 export const defaultState = {
 
-    cartId : null,
-    cartContents:[],
     deliveryDetails:{
         deliveryTo:"John Doe",
         phoneNumber:"5555555555",

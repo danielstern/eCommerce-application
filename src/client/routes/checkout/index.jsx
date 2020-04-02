@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 
 import { ErrorDisplay } from './ErrorDisplay';
 
-import "./checkout.css";
-
 export const CheckoutRoute = connect(state => ({
 
     ... state.orderPricing,
@@ -23,10 +21,12 @@ export const CheckoutRoute = connect(state => ({
     handleCreditCardDetailChange(property, value){
 
         dispatch({type:"MODIFY_CREDIT_CARD_PROPERTY", property, value})
+
     },
     handleDeliveryDetailChange(property, value){
 
         dispatch({type:"MODIFY_DELIVERY_DETAIL_PROPERTY", property, value})
+
     },
     handleSubmitCheckout(e) {
 
@@ -227,6 +227,7 @@ export const CheckoutRoute = connect(state => ({
             {{
                 ["SUCCESS"]: <h3>Success! Your product is on the way!</h3>,
                 ["ALREADY_COMPLETED"]: <h3>You've already checked out successfully.</h3>
+                
             }[checkoutStatus]}
 
 

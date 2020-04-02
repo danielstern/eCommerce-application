@@ -1,8 +1,10 @@
 import React from 'react';
 
 const styles = {
+    
     table:{borderCollapse:"collapse", border:"1px solid black"}
 }
+
 export const Template = ({creditCardDetails, orderDetails, deliveryDetails, date}) => (
     <div>
         <h1>

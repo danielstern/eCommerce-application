@@ -1,12 +1,7 @@
 import { MONGO_URL } from '../../../common/config';
-import { CartContentsAction } from '../../../common/constants';
 import { MongoClient } from 'mongodb';
 
 let client = undefined;
-
-export async function initializeDB() {
-
-}
 
 export async function getClient () {
     

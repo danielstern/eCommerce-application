@@ -1,5 +1,5 @@
 import { getCollection } from '../utility';
-import { CartCheckoutStatus, CartCheckoutAction, CartContentsAction } from '../../../common/constants';
+import { CartCheckoutStatus, CartCheckoutAction } from '../../../common/constants';
 import { v1 } from 'uuid';
 
 export function cartReducer (cartId, history) {
@@ -28,15 +28,7 @@ export function cartReducer (cartId, history) {
                 }
             }, 
             CartCheckoutStatus.CHECKOUT_NOT_STARTED
-        ),
-        // summarizedValue: history
-        //     .filter(action => action.type === CartContentsAction.ADD_ITEM)
-        //     .map(action => action.meta.itemValue)
-        //     .reduce((a,b) => a + b),
-        // contents: history
-        //     .filter(event => event.type === CartContentsAction.ADD_ITEM)
-        //     .map(action => action.meta)
-
+        )
     }
 
 }
@@ -44,12 +36,8 @@ export function cartReducer (cartId, history) {
 export async function GetCartDetails (cartId) {
 
     const collection = await getCollection("carts", cartId);
-    // const collection = await getCollection("carts", cartId);
     const history = await collection.find().toArray();
 
-    // return cartReducer(cartId, history);
-
-    
     return {
         ... cartReducer(cartId, history),
         ...(await collection.findOne({type:"CREATE_CART"})).meta

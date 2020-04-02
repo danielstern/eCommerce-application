@@ -28,7 +28,6 @@ button {
     margin-top: 0.6rem;
     line-height: 1em;
     font-size: 1.2rem;
-    /* border-radius: 0.2rem; */
     width: 20rem;
 
 }
@@ -41,7 +40,6 @@ input[type="text"] {
     margin-bottom: 0.4rem;
     padding: 0.6rem;
     font-size: 0.8rem;
-    /* border-radius: 0.2rem; */
 
 }
 
@@ -64,4 +62,25 @@ form label {
 input[type="radio"] {
     margin-right: 1rem;
     margin-bottom: 0.5rem;
+}
+
+form {
+
+    width: 600px;
+    padding: 10px 0px;
+
+}
+
+.error {
+
+    font-size: 1.2rem;
+    font-family: arial;
+    color: crimson;
+    
+}
+
+button.checkout {
+
+    width: 28rem;
+    
 }

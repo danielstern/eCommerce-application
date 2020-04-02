@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --open",
-    "build": "webpack",
-    "dev-with-server": "webpack --watch"
+    "build": "webpack"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
