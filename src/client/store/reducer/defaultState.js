@@ -1,5 +1,6 @@
 export const defaultState = {
 
+    cartId: null,
     deliveryDetails:{
         deliveryTo:"John Doe",
         phoneNumber:"5555555555",

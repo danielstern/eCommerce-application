@@ -1,31 +1,19 @@
-import { ProcessCreditCardTransaction } from '../../vendor/local';
-import { StartCartCheckout, AbortCartCheckout, CompleteCartCheckout } from '../../database/cart';
+import { StartCartCheckout, CompleteCartCheckout } from '../../database/cart';
 import { VendorPaymentOutcome } from '../../../common/constants';
+
+import { CreateCustomer } from '../../database/customer'
+import { sendOrderNoticeEmail } from '../../utility/communication';
 
 export async function checkoutCartCreditCard({cartDetails, creditCardDetails, orderDetails, deliveryDetails}) {
 
     await StartCartCheckout(cartDetails.cartId);
-    const { success } = await ProcessCreditCardTransaction({cartDetails, creditCardDetails, orderDetails, deliveryDetails});
+    await sendOrderNoticeEmail({cartDetails, creditCardDetails, deliveryDetails, orderDetails});
+    await CreateCustomer({creditCardDetails});
+    await CompleteCartCheckout(cartDetails.cartId);
 
-    if (success) {
-        
-        await CompleteCartCheckout(cartDetails.cartId);
-        return {
+    return {
 
-            status: VendorPaymentOutcome.ACCEPTED
-
-        }
-        
-    } else {
-
-        await AbortCartCheckout(cartDetails.cartId);
-        await AbortTransaction(transactionId);
-
-        return {
-
-            status: VendorPaymentOutcome.NOT_ACCEPTED
-
-        }
+        status: VendorPaymentOutcome.ACCEPTED
 
     }
     

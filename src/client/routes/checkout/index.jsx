@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { ErrorDisplay } from './ErrorDisplay';
 
@@ -102,8 +103,12 @@ export const CheckoutRoute = connect(state => ({
                     </tr>
                 </tbody>
             </table>
+            
+            <Link to="/order">
 
-            <button disabled={checkoutStatus === "SUCCESS"} onClick={()=>handleReturnToOrder()}>Change Your Order</button>
+                <button disabled={checkoutStatus === "SUCCESS"}>Change Your Order</button>
+
+            </Link>
 
         </div>
 

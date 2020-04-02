@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 
 export const OrderRoute = connect(
@@ -158,7 +159,10 @@ export const OrderRoute = connect(
             Subtotal: {totalPrice}
         </h2>
 
-        <button onClick={()=>handleGoToCheckout()}>Go to Checkout</button>
+
+        <Link to="/checkout">
+            <button>Go to Checkout</button>
+        </Link>
         
     </div>
 ))

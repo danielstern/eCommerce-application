@@ -4,9 +4,9 @@ import { CreateCart } from '../../database/cart';
 
 export const Cart = Router();
 
-Cart.post("/create", async ({body},res)=>{
+Cart.post("/create", async (_req,res)=>{
 
-    const { cartId } = await CreateCart({...body.orderDetails, totalPrice : body.orderPricing.totalPrice});
+    const { cartId } = await CreateCart();
     res.json({cartId, success: true})
 
 });

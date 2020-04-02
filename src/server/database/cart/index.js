@@ -45,7 +45,7 @@ export async function GetCartDetails (cartId) {
 
 }
 
-export async function CreateCart (meta) {
+export async function CreateCart () {
 
     const cartId = v1();
     const collection = await getCollection("carts", cartId);
@@ -57,7 +57,6 @@ export async function CreateCart (meta) {
         meta:{ 
 
             cartId: cartId,
-            ...meta
 
         }
 

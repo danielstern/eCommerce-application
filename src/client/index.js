@@ -6,8 +6,10 @@ import { Provider } from 'react-redux';
 
 import { priceCalculation } from './sagas/priceCalculation';
 import { submitCheckout } from './sagas/submitCheckout';
+import { cartCreation } from './sagas/cartCreation';
 import { MainRoute } from './routes/main'
 import { reducer } from './store/reducer';
+
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -18,6 +20,7 @@ const store = createStore(
 
 sagaMiddleware.run(priceCalculation);
 sagaMiddleware.run(submitCheckout);
+sagaMiddleware.run(cartCreation);
 
 ReactDOM.render(
     <Provider store={store}>

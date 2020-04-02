@@ -25,4 +25,6 @@ export async function sendOrderNoticeEmail({cartDetails, creditCardDetails, deli
         html: ReactDOMServer.renderToString(<Template date={new Date} cartDetails={cartDetails} creditCardDetails={creditCardDetails} deliveryDetails={deliveryDetails} orderDetails={orderDetails}/>)
     });
 
+    console.info("INFO:: Sent notification mail.")
+
 }

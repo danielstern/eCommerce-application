@@ -2,7 +2,9 @@ import { defaultState } from './defaultState';
 export function reducer(state = defaultState, action){
 
     switch (action.type) {
+
         case "HANDLE_CHANGE_ORDER_PROPERTY" : {
+
             return {
                 ...state,
                 orderDetails:{
@@ -10,6 +12,7 @@ export function reducer(state = defaultState, action){
                     [action.property]:action.value
                 }
             }
+            
         }
         case "MODIFY_CREDIT_CARD_PROPERTY": {
             return {
@@ -58,6 +61,12 @@ export function reducer(state = defaultState, action){
             return {
                 ... state,
                 checkoutStatus: action.status
+            }
+        }
+        case "SET_CARD_ID" : {
+            return {
+                ...state,
+                cartId: action.cartId
             }
         }
         default:
