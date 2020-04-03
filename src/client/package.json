@@ -1,7 +1,5 @@
 {
   "name": "ecommerce-app-client",
-  "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --open",
@@ -30,8 +28,5 @@
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",
     "uuid": "^3.3.2"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }

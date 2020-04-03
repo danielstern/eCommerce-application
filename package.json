@@ -1,18 +1,14 @@
 {
   "name": "web-ecommerce-app",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "An application for managing eCommerce transacations",
   "main": "index.js",
   "scripts": {
     "watch-server": "cd src/server && npm run dev",
     "watch-client": "cd src/client && npm run dev",
-    "dev": "concurrently npm:watch-*"
+    "start": "concurrently npm:watch-*"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "concurrently": "^5.1.0",
-    "cross-env": "^7.0.2"
+    "concurrently": "^5.1.0"
   }
 }
