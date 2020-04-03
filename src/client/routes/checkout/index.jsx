@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
+import { withCartId } from '../../components/mixins/withCartId';
+
 
 import { ErrorDisplay } from './ErrorDisplay';
 
-export const CheckoutRoute = connect(state => ({
+export const CheckoutRoute = withCartId( connect(state => ({
 
     ... state.orderPricing,
     ... state.creditCardDetails,
@@ -121,16 +123,16 @@ export const CheckoutRoute = connect(state => ({
                     </tr>
                 </tbody>
             </table>
-            
+
             <Link to="/order">
 
                 <button disabled={checkoutStatus === "SUCCESS"}>Change Your Order</button>
 
             </Link>
 
-        </div>
+            </div>
 
-        {checkoutStatus !== "SUCCESS" && checkoutStatus !== "ALREADY_COMPLETED" ? 
+            {checkoutStatus !== "SUCCESS" && checkoutStatus !== "ALREADY_COMPLETED" ? 
             <div id="CheckoutContainer">
 
                 <h2 id="CheckoutTitle">
@@ -150,33 +152,33 @@ export const CheckoutRoute = connect(state => ({
                 <div>
                 
                     <label>
-            
+
                         Name
-            
+
                     </label>
                     
                     <input type="text" value={deliveryTo} onChange={(e)=>handleDeliveryDetailChange("deliveryTo", e.target.value)}/>
-        
+
                 </div>
 
                 <div>
                 
                     <label>
-            
+
                         Address
-            
+
                     </label>
                     
                     <input type="text" value={deliveryAddress} onChange={(e)=>handleDeliveryDetailChange("deliveryAddress", e.target.value)}/>
-        
+
                 </div>
 
                 <div>
                 
                 <label>
-        
+
                     Phone Number
-        
+
                 </label>
                 
                 <input type="text" value={phoneNumber} onChange={(e)=>handleDeliveryDetailChange("phoneNumber", e.target.value)}/>
@@ -248,17 +250,23 @@ export const CheckoutRoute = connect(state => ({
             </div> : null }
 
             {{
+
                 ["SUCCESS"]: 
                     <div>
+
                         <h3>Success! Your product is on the way!</h3>,
                         <Link to="/">
+
                             <button onClick={()=>handleRestartOrder()}>Start a New Order</button>
+
                         </Link>
+
                     </div>,
+
                 ["ALREADY_COMPLETED"]: <h3>You've already checked out successfully.</h3>
                 
             }[checkoutStatus]}
 
-
     </div>
-))
+
+)))

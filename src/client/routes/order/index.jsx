@@ -2,11 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 
-export const OrderRoute = connect(
+import { withCartId } from '../../components/mixins/withCartId';
+
+export const OrderRoute = withCartId( connect(
     (state)=>({
 
+        cartId:state.cartId,
+        totalPrice: state.orderPricing.totalPrice,
         ...state.orderDetails,
-        totalPrice: state.orderPricing.totalPrice
 
     }),
     (dispatch)=>({
@@ -24,14 +27,16 @@ export const OrderRoute = connect(
         
     })
 )(({
+
+    cartId,
     size,
     flavor,
     frostingFlavor,
     totalPrice,
     ornament,
     message,
-    handleChangeOrderProperty,
-    handleGoToCheckout
+    handleChangeOrderProperty
+
 })=>(
     <div>
 
@@ -165,4 +170,4 @@ export const OrderRoute = connect(
         </Link>
         
     </div>
-))
+)))
