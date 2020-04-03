@@ -5,25 +5,25 @@ import {
 } from "react-router-dom";
 import { connect } from 'react-redux';
 
-// import { history } from '../../store/history';
-
-import { OrderRoute } from '../order';
-import { CheckoutRoute } from '../checkout';
-import { WelcomeRoute } from '../welcome';
+import { OrderRoute } from './order';
+import { CheckoutRoute } from './checkout';
+import { WelcomeRoute } from './welcome';
 
 import './main.css';
 
-export const MainRoute = connect(state=>state)(({currentRoute})=>(
+export const MainRoute = connect()(()=>(
     <div className="main">
         <h1>
+
             Katie's Custom Cakes
+            
         </h1>
-        {/* <Router history={history}> */}
         <Router>
 
             <Route path="/" exact >
 
                 <WelcomeRoute />
+
             </Route>
 
             <Route path="/order">
@@ -39,10 +39,7 @@ export const MainRoute = connect(state=>state)(({currentRoute})=>(
             </Route>
 
         </Router>
-        {/* {{
-            ["ORDER"]:<OrderRoute />,
-            ["CHECKOUT"]:<CheckoutRoute />
-        }[currentRoute]} */}
+
     </div>
     
 ))

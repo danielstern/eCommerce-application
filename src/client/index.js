@@ -5,11 +5,9 @@ import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import createlogger from 'redux-logger';
 
-import { priceCalculation } from './sagas/priceCalculation';
-import { submitCheckout } from './sagas/submitCheckout';
-import { cartCreation } from './sagas/cartCreation';
-import { localState } from './sagas/localState';
-import { MainRoute } from './routes/main'
+import * as sagas from './sagas';
+
+import { MainRoute } from './routes'
 import { reducer } from './store/reducer';
 
 
@@ -23,10 +21,13 @@ const store = createStore(
     )
 );
 
-sagaMiddleware.run(priceCalculation);
-sagaMiddleware.run(submitCheckout);
-sagaMiddleware.run(cartCreation);
-sagaMiddleware.run(localState);
+for (let saga of Object.values(sagas))
+{
+
+    sagaMiddleware.run(saga);
+
+}
+
 
 ReactDOM.render(
     <Provider store={store}>

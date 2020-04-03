@@ -28,7 +28,6 @@ export const OrderRoute = withCartId( connect(
     })
 )(({
 
-    cartId,
     size,
     flavor,
     frostingFlavor,
