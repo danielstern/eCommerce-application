@@ -13,7 +13,7 @@ export const OrderRoute = connect(
 
         handleChangeOrderProperty(property, value){
 
-            dispatch({type:"HANDLE_CHANGE_ORDER_PROPERTY", property, value});
+            dispatch({type:"MODIFY_ORDER_PROPERTY", property, value});
 
         },
         handleGoToCheckout(){

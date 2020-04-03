@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
+import createlogger from 'redux-logger';
 
 import { priceCalculation } from './sagas/priceCalculation';
 import { submitCheckout } from './sagas/submitCheckout';
 import { cartCreation } from './sagas/cartCreation';
+import { localState } from './sagas/localState';
 import { MainRoute } from './routes/main'
 import { reducer } from './store/reducer';
 
@@ -15,12 +17,16 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
     reducer,
-    applyMiddleware(sagaMiddleware)
+    applyMiddleware(
+        sagaMiddleware,
+        createlogger
+    )
 );
 
 sagaMiddleware.run(priceCalculation);
 sagaMiddleware.run(submitCheckout);
 sagaMiddleware.run(cartCreation);
+sagaMiddleware.run(localState);
 
 ReactDOM.render(
     <Provider store={store}>

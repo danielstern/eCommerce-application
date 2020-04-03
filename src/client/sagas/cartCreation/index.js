@@ -16,7 +16,6 @@ export const cartCreation = function*(){
 
         const { cartId } = yield cartRequest.json();
 
-        localStorage.setItem("cartId", cartId);
         yield put({type: "SET_CART_ID", cartId});
         yield call(history.push, '/order');
     

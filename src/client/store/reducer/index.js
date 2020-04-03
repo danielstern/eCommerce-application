@@ -3,7 +3,7 @@ export function reducer(state = defaultState, action){
 
     switch (action.type) {
 
-        case "HANDLE_CHANGE_ORDER_PROPERTY" : {
+        case "MODIFY_ORDER_PROPERTY" : {
 
             return {
                 ...state,
@@ -42,12 +42,6 @@ export function reducer(state = defaultState, action){
             }
 
         }
-        case "MODIFY_APP_ROUTE" : {
-            return {
-                ...state,
-                currentRoute: action.route
-            }
-        }
         case "SET_FORM_ERRORS" : {
             return {
                 ...state,
@@ -63,16 +57,36 @@ export function reducer(state = defaultState, action){
                 checkoutStatus: action.status
             }
         }
-        case "SET_CARD_ID" : {
+        case "SET_CART_ID" : {
             return {
                 ...state,
                 cartId: action.cartId
             }
         }
-        default:
+        case "LOAD_STATE": {
+            return {
+                ...state,
+                ...action.state,
+            }
+        }
+
+        case "RESTART_ORDER" : {
+
+            return {
+
+                ... defaultState
+
+            }
+
+        }
+        default: {
+
             return state;
 
         }
+            
 
-        
     }
+
+    
+}

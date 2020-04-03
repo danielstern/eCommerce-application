@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
 
 import { ErrorDisplay } from './ErrorDisplay';
 
@@ -34,6 +35,11 @@ export const CheckoutRoute = connect(state => ({
         e.preventDefault();
         dispatch({type:"SUBMIT_CHECKOUT"});
 
+    },
+    handleRestartOrder() {
+
+        dispatch({type:"RESTART_ORDER"})
+
     }
 }))(({
 
@@ -52,13 +58,15 @@ export const CheckoutRoute = connect(state => ({
     flavor,
     ornament,
 
-    handleReturnToOrder,
     handleCreditCardDetailChange,
     handleDeliveryDetailChange,
     handleSubmitCheckout,
+    handleRestartOrder,
 
     formErrors,
-    checkoutStatus
+    checkoutStatus,
+
+    history = useHistory()
 
 }) => (
     <div>
@@ -76,18 +84,28 @@ export const CheckoutRoute = connect(state => ({
             </h3>
 
             <table>
+
                 <tbody>
+
                     <tr>
+
                         <th>
+
                             Size
+
                         </th>
+
                         <td>
+
                             {size}
+
                         </td>
                     </tr>
                     <tr>
                         <th>
+
                             Flavor
+
                         </th>
                         <td>
                             {flavor}
@@ -230,7 +248,13 @@ export const CheckoutRoute = connect(state => ({
             </div> : null }
 
             {{
-                ["SUCCESS"]: <h3>Success! Your product is on the way!</h3>,
+                ["SUCCESS"]: 
+                    <div>
+                        <h3>Success! Your product is on the way!</h3>,
+                        <Link to="/">
+                            <button onClick={()=>handleRestartOrder()}>Start a New Order</button>
+                        </Link>
+                    </div>,
                 ["ALREADY_COMPLETED"]: <h3>You've already checked out successfully.</h3>
                 
             }[checkoutStatus]}
