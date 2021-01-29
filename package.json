@@ -6,6 +6,7 @@
   "scripts": {
     "watch-server": "cd src/server && npm run dev",
     "watch-client": "cd src/client && npm run dev",
+    "postinstall": "cd src/client && npm install && cd .. && cd .. && cd src/server && npm install && cd .. ..",
     "start": "concurrently npm:watch-*"
   },
   "dependencies": {
